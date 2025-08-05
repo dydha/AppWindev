@@ -48,6 +48,7 @@ jobs:
           [ -z "$(ls -A extracted-code/fenetres)" ] && touch extracted-code/fenetres/.gitkeep
           [ -z "$(ls -A extracted-code/classes)" ] && touch extracted-code/classes/.gitkeep
 
+
       - name: Commit et Push des fichiers extraits
         run: |
           git config --global user.name "github-actions[bot]"
