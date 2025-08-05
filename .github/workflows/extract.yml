@@ -9,57 +9,41 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-and-run:
-    runs-on: ubuntu-latest
+  extract-windev-code:
+    runs-on: windows-latest  # Nécessaire pour PowerShell (et éventuellement WinDev si local)
 
     steps:
-      - name: Checkout repository
+      - name: 🧾 Cloner le dépôt
         uses: actions/checkout@v4
 
-      - name: Setup .NET
+      - name: 🛠️ Installer .NET SDK
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
 
-      - name: Build ExtractCode
+      - name: 📦 Restaurer et compiler le projet d'extraction
         run: dotnet build scripts/ExtractCode.csproj --configuration Release
 
-      - name: Run ExtractCode on all .wdw and .wdc files
+      - name: 📤 Extraire le code des fichiers .wdw et .wdc
         run: |
-          mkdir -p output
-          dotnet scripts/bin/Release/net8.0/ExtractCode.dll . ./output
+          $files = Get-ChildItem -Path export_windev -Include *.wdw, *.wdc -Recurse
+          foreach ($file in $files) {
+            $inputPath = $file.FullName
+            $outputPath = "extracted-code"
+            dotnet scripts/bin/Release/net8.0/ExtractCode.dll $inputPath $outputPath
+          }
+        shell: pwsh
 
-      - name: 📂 Lister les fichiers extraits
+      - name: ⚙️ Configurer Git
         run: |
-          echo "Contenu de output :"
-          find output -type f
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
 
-      - name: Copier les fichiers extraits dans le dossier suivi par Git
+      - name: ✅ Commit & push si changements
         run: |
-          mkdir -p extracted-code
-          cp -r output/fenetres extracted-code/ || true
-          cp -r output/classes extracted-code/ || true
-    
-      - name: 🩹 Ajouter .gitkeep pour les dossiers vides
-        run: |
-          mkdir -p extracted-code/fenetres
-          mkdir -p extracted-code/classes
-      
-          if [ -z "$(ls -A extracted-code/fenetres)" ]; then
-            touch extracted-code/fenetres/.gitkeep
-          fi
-      
-          if [ -z "$(ls -A extracted-code/classes)" ]; then
-            touch extracted-code/classes/.gitkeep
-          fi
-
-
-
-      - name: Commit et Push des fichiers extraits
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add extracted-code
-          git commit -m "💾 Mise à jour des fichiers extraits des .wdw et .wdc [CI]" || echo "Aucun changement à commit"
+          git add extracted-code/**/*.txt
+          git diff --cached --quiet || git commit -m "🔄 Mise à jour automatique du code extrait WinDev [CI]"
           git push
+        continue-on-error: true
+
 
