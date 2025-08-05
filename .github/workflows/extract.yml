@@ -42,11 +42,17 @@ jobs:
     
       - name: 🩹 Ajouter .gitkeep pour les dossiers vides
         run: |
-          set -x
           mkdir -p extracted-code/fenetres
           mkdir -p extracted-code/classes
-          [ -z "$(ls -A extracted-code/fenetres)" ] && touch extracted-code/fenetres/.gitkeep
-          [ -z "$(ls -A extracted-code/classes)" ] && touch extracted-code/classes/.gitkeep
+      
+          if [ -z "$(ls -A extracted-code/fenetres)" ]; then
+            touch extracted-code/fenetres/.gitkeep
+          fi
+      
+          if [ -z "$(ls -A extracted-code/classes)" ]; then
+            touch extracted-code/classes/.gitkeep
+          fi
+
 
 
       - name: Commit et Push des fichiers extraits
