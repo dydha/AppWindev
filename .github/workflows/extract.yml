@@ -1,0 +1,45 @@
+name: Extract Windev Code
+
+on:
+  push:
+    paths:
+      - '**.wdw'
+      - '**.wdc'
+      - 'scripts/**'
+  workflow_dispatch:
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: 🛠 Build ExtractCode
+        run: dotnet build scripts/ExtractCode.csproj --configuration Release
+
+      - name: 🚀 Run ExtractCode on .wdw and .wdc files
+        run: |
+          mkdir -p output
+          dotnet scripts/bin/Release/net8.0/ExtractCode.dll . ./output
+
+      - name: 📂 Copier les fichiers extraits dans le dossier suivi par Git
+        run: |
+          mkdir -p extracted-code/fenetres
+          mkdir -p extracted-code/classes
+          cp -r output/fenetres/* extracted-code/fenetres/ || true
+          cp -r output/classes/* extracted-code/classes/ || true
+
+      - name: 💾 Commit et Push des fichiers extraits
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add extracted-code
+          git commit -m "💾 Mise à jour des fichiers extraits des .wdw et .wdc [CI]" || echo "Aucun changement à commit"
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:${{ github.ref_name }}
