@@ -24,15 +24,18 @@ jobs:
       - name: 📦 Restaurer et compiler le projet d'extraction
         run: dotnet build scripts/ExtractCode.csproj --configuration Release
 
-      - name: 📤 Extraire le code des fichiers .wdw et .wdc
+      - name: Extraire le code des fichiers .wdw et .wdc
         run: |
-          $files = Get-ChildItem -Path export_windev -Include *.wdw, *.wdc -Recurse
+          $files = Get-ChildItem -Path . -Include *.wdw, *.wdc -Recurse
           foreach ($file in $files) {
             $inputPath = $file.FullName
-            $outputPath = "extracted-code"
-            dotnet scripts/bin/Release/net8.0/ExtractCode.dll $inputPath $outputPath
+            $baseName = [System.IO.Path]::GetFileNameWithoutExtension($file.Name)
+            $outputFolder = if ($file.Extension -eq ".wdw") { "extracted_code/fenetres" } else { "extracted_code/classes" }
+            mkdir $outputFolder -Force
+            dotnet run --project scripts/ExtractCode.csproj $inputPath $outputFolder
           }
         shell: pwsh
+
 
       - name: ⚙️ Configurer Git
         run: |
