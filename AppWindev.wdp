@@ -28,6 +28,12 @@ project :
   identifier : 0x48920f480005ae7d
   elements :
    -
+     name : FEN_NavMenu
+     identifier : 0x489217bb00e4af09
+     internal_properties : HgAAAB4AAADiWNrO/aoCHT7gL7ODYtDEjiFdnTqodAROK6G2er5eqkaEga4x13Tzh70nkRHPqx3nbw==
+     physical_name : .\FEN_NavMenu.wdw
+     type : 2
+   -
      name : FEN_Home
      identifier : 0x4892126700b2dd72
      internal_properties : HgAAAB4AAABMyqTwT3Q8b3wiYA3zUGTj7sHNvapQ3292qfBirmoiNooAtieKvpmpSf/5x0+BeW9Z2Q==
