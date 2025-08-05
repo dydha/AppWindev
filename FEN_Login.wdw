@@ -73,9 +73,9 @@ window :
      name : Login
      procedure_id : 1770506723398545914
      type_code : 14
-     code : |1+
+     code : |1-
       procédure Login()
-      Info("Log in")
+      Info("Log in modifié")
      type : 458752
   procedure_templates : []
   property_templates : []
