@@ -77,6 +77,14 @@ window :
       procédure MyNav()
       Info("Nav")
      type : 458752
+   -
+     name : MyNav2
+     procedure_id : 1770504700467298335
+     type_code : 14
+     code : |1+
+      procédure MyNav2()
+      Info("Nav 2")
+     type : 458752
   procedure_templates : []
   property_templates : []
  code_parameters :
