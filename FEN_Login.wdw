@@ -75,7 +75,7 @@ window :
      type_code : 14
      code : |1-
       procédure Login()
-      Info("Log in modifié")
+      Info("Log in modifié encore et encore")
      type : 458752
   procedure_templates : []
   property_templates : []
