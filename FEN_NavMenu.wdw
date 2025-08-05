@@ -83,7 +83,7 @@ window :
      type_code : 14
      code : |1+
       procédure MyNav2()
-      Info("Nav 2")
+      Info("Nav 2 modifiée")
      type : 458752
   procedure_templates : []
   property_templates : []
