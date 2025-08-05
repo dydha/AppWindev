@@ -26,7 +26,7 @@ jobs:
 
       - name: 📤 Extraire le code des fichiers .wdw et .wdc
         run: |
-          $files = Get-ChildItem -Path export_windev -Include *.wdw, *.wdc -Recurse
+          $files = Get-ChildItem -Path  -Include *.wdw, *.wdc -Recurse
           foreach ($file in $files) {
             $inputPath = $file.FullName
             $outputPath = "extracted-code"
