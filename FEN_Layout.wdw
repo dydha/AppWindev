@@ -75,7 +75,7 @@ window :
      type_code : 14
      code : |1+
       procédure MaProcedure()
-      Info("Procédure")
+      Info("Procédure modifiée")
      type : 458752
   procedure_templates : []
   property_templates : []

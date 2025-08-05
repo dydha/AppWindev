@@ -18,6 +18,7 @@ class :
       Person est une Classe
       	Nom est une chaîne
       	Age est un entier
+      	Pays est une chaine
       fin
      type : 131072
   procedures :
