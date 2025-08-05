@@ -28,7 +28,7 @@ class WinDevCodeExtractor
         Directory.CreateDirectory(classesOutput);
 
         // Fichiers à traiter : .wdw et .wdc
-        var files = Directory.GetFiles(inputDirectory, "*.*", SearchOption.AllDirectories)
+        var files = Directory.GetFiles(inputDirectory, "*.*")
                              .Where(f => f.EndsWith(".wdw", StringComparison.OrdinalIgnoreCase) ||
                                          f.EndsWith(".wdc", StringComparison.OrdinalIgnoreCase));
 
