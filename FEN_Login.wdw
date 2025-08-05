@@ -1,0 +1,92 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : FEN_Login
+ major_version : 30
+ minor_version : 0
+ type : 2
+ description : ""
+ subtype : 0
+window :
+ name : FEN_Login
+ identifier : 0x28921a6f03753e48
+ internal_properties : HgAAAB4AAADgFDin/9kEsfWgHEjQIUlcSSLAKsutM9vYSsuOqi2ToqOw0iCa8wiht+CePlWSJXcd+iSQOaFdWXRgWemUHQwNbL/IPdZijf6LoWrf0MW26bvxHWYprxwspzgorBVbF+2o2n1hNlmN3ol+9SeFwNVuDm7f3IjUGVtJy5uHyNmxE6pgfdTY2Isy6ZEYUb88bM3DWAJSI+Tu6VEKXdY+1A6aEx9ouXbEgloxIRpm7wR+QOrf4yaDBZff+nNV2zGondr6Emk6Yt1vdzgb2LXGZ5MIRaCqwYM1gmZNG4N9cJr+pliNBZ0V0Gdp6rhL1K1MMWGSKvqJjtYs88Denv6IdJvSwqkuwr4Hy8r5RxNIcdAKClUKDb5T1R38Nm7sAP67eqprMcRaivZRXpywRNFnsKvbDKzsF+A5rcRRI1ZdtTu4dZk5rBhDILgHLHpB5PscGyZCBL+QWy9qFm6oRM66iIYNGetEv+K04EgCSS24DZ9VmmpO2TVmBuK3SbP0BzNP6t2viVAFAodRH3YdxMZL0AuMEUphP0F8iMOByk94irOZ2uVDTq4XcstW74VmQ4aIR050Sgvv01bQHHzjxtbzXWFqUq7K1rsZ3ZewquSzFafR5W6bmg+50cdc31tdEKf2d/HMUd1Cd7y8psEfLnq0DVL56lmgrvW3P0yuRB64rsFM7w0J35E6DBLJjOC84CmCwa22mAf8nvFPglI/F2pB0rr8LuxzwAxuW1uZ9TBXa/2fvlAPuyRdXKndYjSheziLGMPcKSx5sAO+okg=
+ properties :
+  width : 1024
+  height : 768
+  widthClient : 1022
+  heightClient : 736
+ style : {}
+ controls : []
+ menu :
+  name : _Menu
+  identifier : 0x292573e513b5f221
+  internal_properties : HgAAAB4AAAA08WG3XyQFKJxzCLWea0/+HxJGgu+shggPCQNObIN6GqReYy6HZxEndzPFMO/bqd98H6TmSFM21mFd1Zf908Yde8muSQZCvbPrb4JHJ0NaphUT9kXMiuCv5swbftatm0uLuaglR3NgLd+LnWSVqa3z1mGCuYqBbkkhajgSyx7cVdQ0Je2KlU8ezPuonp83DpwGJhi9n+K8Id8XGucthpj2daNzgfqWh4eqNMZ/PWoNCfOnCzSKrXgZBX+Bow1M3pqSx2yeBNGF78aADhfQKl+VO2HnjfFJGYv7YxdGw/Q=
+  properties : {}
+  style : {}
+  options : []
+ languages :
+  - fr-FR
+ popup_menus : []
+ message_bar :
+  internal_properties : HgAAAB4AAAAjFWXItEk/EPvcbGR+hALkgRfdOpVtIn+yZNxHnmSRFJegE/AnD2HbGAaMfhGCqfzkryHG9FVhjtF+iQYkZ59QBQ88Okhh0vjCoVhOagox2hvIqrJnU30QK15/ZA==
+ actionbar : {}
+ code_elements :
+  type_code : 1
+  p_codes :
+   -
+     code : |1+
+      PROCEDURE MaFenêtre()
+   -
+     code : |1+
+      
+      
+     type : 34
+   -
+     code : |1+
+      
+      
+     type : 234
+   -
+     code : |1+
+      
+      
+     type : 165
+   -
+     code : |1+
+      
+      
+     type : 177
+   -
+     type : 180
+     enabled : false
+   -
+     type : 230
+     enabled : false
+   -
+     code : |1+
+      
+      
+     type : 2
+  procedures :
+   -
+     name : Login
+     procedure_id : 1770506723398545914
+     type_code : 14
+     code : |1+
+      procédure Login()
+      Info("Log in")
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : HgAAAB4AAACoLZs0mW4lq5aP9aNErAlUOSHZ7X4ZrJFFT1JWjhhvitD/xL/r2Etbr+oKxbieVf7YoEoO7HUdc4CD59271o8AU+x7o881eemR/sfDJwMvJH35
+  original_name : Modele1
+resources :
+ string_res :
+  identifier : 0x18921a69009a2513
+  internal_properties : HgAAAB4AAAAEBvz4BdTt90ISSptwDJCphvKgZdUR2e2WGWtmgJlonsrIZP01S5+UbwYBB2sFt7MTEw==
+custom_note :
+ internal_properties : HgAAAB4AAAC68/W0/adbG0nFCRhrE42B5HRnbDzVHaz86sSQyxlBk7I=
+rad :
+ internal_properties : HgAAAB4AAABoAN7PLpwJW3EiA7WVZdCA5EwrCA1rvutcDHooMWKe
