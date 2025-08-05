@@ -28,6 +28,12 @@ project :
   identifier : 0x48920f480005ae7d
   elements :
    -
+     name : FEN_NewFenetre
+     identifier : 0x4892205302264126
+     internal_properties : HgAAAB4AAABJxbFVUg8nyOvduTwk2+FIP2g6KpE3j52KlLF3i71Zl6WrfTTjZyzktGpUrHRsFIRM1A==
+     physical_name : .\FEN_NewFenetre.wdw
+     type : 2
+   -
      name : FEN_Login
      identifier : 0x48921a6f01413e48
      internal_properties : HgAAAB4AAABv60dbaBUdzp3TBVatcBb2UwYiqhe1+b5Oy+Y0znqYUPwAZmjab1DWumBapm5iHpJ6+g==
