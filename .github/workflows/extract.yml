@@ -37,10 +37,12 @@ jobs:
       - name: Copier les fichiers extraits dans le dossier suivi par Git
         run: |
           mkdir -p extracted-code
-          cp -r output/* extracted-code/
-
+          cp -r output/fenetres extracted-code/ || true
+          cp -r output/classes extracted-code/ || true
+    
       - name: 🩹 Ajouter .gitkeep pour les dossiers vides
         run: |
+          set -x
           mkdir -p extracted-code/fenetres
           mkdir -p extracted-code/classes
           [ -z "$(ls -A extracted-code/fenetres)" ] && touch extracted-code/fenetres/.gitkeep
