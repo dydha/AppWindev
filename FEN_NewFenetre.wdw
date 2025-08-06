@@ -85,6 +85,14 @@ window :
       procédure Nouvelle_Procédure2()
       Info("Nouvelle procédure 2")
      type : 458752
+   -
+     name : Nouvelle_Procédure3
+     procedure_id : 1770762986912472647
+     type_code : 14
+     code : |1+
+      procédure Nouvelle_Procédure3()
+      Info("Nouvelle procédure 3")
+     type : 458752
   procedure_templates : []
   property_templates : []
  code_parameters :
