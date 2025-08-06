@@ -3,50 +3,60 @@ name: Extract Windev Code
 on:
   push:
     paths:
-      - '**.wdw'
-      - '**.wdc'
+      - '**/*.wdw'
+      - '**/*.wdc'
       - 'scripts/**'
   workflow_dispatch:
 
 jobs:
-  extract-windev-code:
-    runs-on: windows-latest  # Nécessaire pour PowerShell (et éventuellement WinDev si local)
+  extract-code:
+    runs-on: windows-latest
 
     steps:
-      - name: 🧾 Cloner le dépôt
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: 🛠️ Installer .NET SDK
+      - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
 
-      - name: 📦 Restaurer et compiler le projet d'extraction
+      - name: Build ExtractCode
         run: dotnet build scripts/ExtractCode.csproj --configuration Release
 
-      - name: Extraire le code des fichiers .wdw et .wdc
-        run: |
-          $files = Get-ChildItem -Path . -Include *.wdw, *.wdc 
-          foreach ($file in $files) {
-            $inputPath = $file.FullName
-            $baseName = [System.IO.Path]::GetFileNameWithoutExtension($file.Name)
-            $outputFolder = if ($file.Extension -eq ".wdw") { "extracted_code/fenetres" } else { "extracted_code/classes" }
-            mkdir $outputFolder -Force
-            dotnet run --project scripts/ExtractCode.csproj $inputPath $outputFolder
-          }
+      - name: Get changed .wdw and .wdc files
+        id: changed_files
         shell: pwsh
-
-
-      - name: ⚙️ Configurer Git
         run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
+          $changed = git diff --name-only HEAD~1 HEAD | Where-Object { $_ -like '*.wdw' -or $_ -like '*.wdc' }
+          if (-not $changed) {
+            echo "No relevant files changed."
+            exit 0
+          }
+          echo "Changed files:"
+          $changed | ForEach-Object { echo $_ }
+          echo "files=$($changed -join ',')" >> $env:GITHUB_OUTPUT
 
-      - name: ✅ Commit & push si changements
+      - name: Run ExtractCode on changed files
+        if: steps.changed_files.outputs.files != ''
+        shell: pwsh
         run: |
-          git add extracted-code/**/*.txt
-          git diff --cached --quiet || git commit -m "🔄 Mise à jour automatique du code extrait WinDev [CI]"
+          $files = "${{ steps.changed_files.outputs.files }}".Split(",")
+          foreach ($file in $files) {
+            echo "Extracting from: $file"
+            dotnet scripts/bin/Release/net8.0/ExtractCode.dll $file extracted-code
+          }
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Commit and push extracted code
+        run: |
+          git add extracted-code
+          git commit -m "💾 Mise à jour du code extrait des fichiers WinDev [CI]" || echo "Aucun changement à committer"
           git push
-        continue-on-error: true
+
 
 
